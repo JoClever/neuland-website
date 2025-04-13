@@ -21,7 +21,7 @@ import { compareDesc } from 'date-fns'
 import { TagIcon } from 'lucide-react'
 import Link from 'next/link'
 
-export default function Home({
+export default async function Home({
 	searchParams
 }: {
 	searchParams: { [key: string]: string | string[] | undefined }
@@ -30,9 +30,11 @@ export default function Home({
 		compareDesc(new Date(a.date), new Date(b.date))
 	)
 
+	const { page } = await searchParams
+
 	// Pagination logic
 	const POSTS_PER_PAGE = 12
-	const currentPage = Number(searchParams.page) || 1
+	const currentPage = Number(page) || 1
 	const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE)
 
 	const paginatedPosts = posts.slice(

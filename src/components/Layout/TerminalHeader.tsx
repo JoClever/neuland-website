@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import type React from 'react'
 
@@ -8,6 +8,7 @@ const TerminalHeader: React.FC = () => {
 	const [scrolled, setScrolled] = useState(false)
 	const navigate = useRouter()
 	const isJune = new Date().getMonth() === 5
+	const pathname = usePathname()
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -30,6 +31,12 @@ const TerminalHeader: React.FC = () => {
 
 	const scrollToMembership = (e: React.MouseEvent) => {
 		e.preventDefault()
+
+		if (pathname !== '/') {
+			navigate.push('/#membership')
+			return
+		}
+
 		const membershipSection = document.getElementById('membership')
 		if (membershipSection) {
 			const headerHeight = 80

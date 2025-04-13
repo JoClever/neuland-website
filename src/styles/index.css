@@ -124,6 +124,10 @@
 	body {
 		font-family: var(--font-mono);
 	}
+
+	html {
+		@apply scroll-smooth;
+	}
 }
 
 @layer base {
