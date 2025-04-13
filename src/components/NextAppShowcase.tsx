@@ -189,6 +189,10 @@ const NextAppShowcase = () => {
 								</a>
 							</div>
 							<TerminalButton href="https://next.neuland.app">
+								<MapPin
+									size={16}
+									className="mr-2 group-hover:rotate-8 transition-transform duration-300"
+								/>
 								Weitere Infos
 							</TerminalButton>
 						</motion.div>

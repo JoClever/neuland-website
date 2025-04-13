@@ -19,7 +19,7 @@ const TerminalButton: React.FC<TerminalButtonProps> = ({
 		return (
 			<a
 				href={href}
-				className="inline-flex items-center justify-center px-4 py-2 border border-terminal-cyan text-terminal-cyan bg-transparent hover:bg-terminal-cyan hover:text-terminal-bg transition-colors duration-300 mr-4 mb-4 rounded"
+				className="group inline-flex items-center justify-center px-4 py-2 border border-terminal-cyan text-terminal-cyan bg-transparent hover:bg-terminal-cyan hover:text-terminal-bg transition-colors duration-300 mr-4 mb-4 rounded"
 				onClick={onClick}
 				target={target}
 				rel={rel}
@@ -31,7 +31,7 @@ const TerminalButton: React.FC<TerminalButtonProps> = ({
 
 	return (
 		<button
-			className="inline-flex items-center justify-center px-4 py-2 border border-terminal-cyan text-terminal-cyan bg-transparent hover:bg-terminal-cyan hover:text-terminal-bg transition-colors duration-300 mr-4 mb-4 rounded"
+			className="group inline-flex items-center justify-center px-4 py-2 border border-terminal-cyan text-terminal-cyan bg-transparent hover:bg-terminal-cyan hover:text-terminal-bg transition-colors duration-300 mr-4 mb-4 rounded"
 			onClick={onClick}
 			type="button"
 		>

@@ -1,3 +1,4 @@
+import { Mail, UserPlus } from 'lucide-react'
 import TerminalButton from './TerminalButton'
 
 const TerminalMembership = () => {
@@ -29,9 +30,17 @@ const TerminalMembership = () => {
 
 			<div>
 				<TerminalButton href="https://join.neuland-ingolstadt.de/">
+					<UserPlus
+						size={16}
+						className="mr-2 group-hover:rotate-8 transition-transform duration-300"
+					/>
 					Mitglied werden
 				</TerminalButton>
 				<TerminalButton href="mailto:info@neuland-ingolstadt.de">
+					<Mail
+						size={16}
+						className="mr-2 group-hover:rotate-8 transition-transform duration-300"
+					/>
 					E-Mail schreiben
 				</TerminalButton>
 			</div>

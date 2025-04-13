@@ -17,7 +17,7 @@ export default async function EventsSection() {
 	await queryClient.prefetchQuery({
 		queryKey: ['eventsData'],
 		queryFn: () => eventsData.events,
-		staleTime: 5 * 60 * 1000 // 5 minutes
+		staleTime: 5 * 60 * 1000
 	})
 
 	return (
