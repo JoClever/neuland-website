@@ -81,7 +81,7 @@ export default function TagsIndexPage() {
 										{displayTag}
 									</Badge>
 									<span className="text-terminal-text/70 text-sm">
-										{count} {count === 1 ? 'post' : 'posts'}
+										{count} {count === 1 ? 'Beitrag' : 'Beiträge'}
 									</span>
 								</div>
 								<span className="text-terminal-text/50 group-hover:text-terminal-cyan text-xs font-mono">

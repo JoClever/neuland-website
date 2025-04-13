@@ -150,8 +150,8 @@ export default function TagPage({
 				#{displayTag}
 			</h1>
 			<p className="mb-8 text-terminal-text/70">
-				{filteredPosts.length} {filteredPosts.length === 1 ? 'post' : 'posts'}{' '}
-				gefunden
+				{filteredPosts.length}{' '}
+				{filteredPosts.length === 1 ? 'Beitrag' : 'Beiträge'} gefunden
 			</p>
 
 			{filteredPosts.length > 0 ? (
