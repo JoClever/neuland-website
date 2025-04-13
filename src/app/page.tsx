@@ -5,6 +5,7 @@ import TerminalSection from '@/components/Layout/TerminalSection'
 import NextAppShowcase from '@/components/NextAppShowcase'
 import ProjectsShowcase from '@/components/Projects/ProjectsShowcase'
 import TerminalMembership from '@/components/TerminalMembership'
+import TerminalPartners from '@/components/TerminalPartners'
 
 export default async function Index() {
 	return (
@@ -16,12 +17,12 @@ export default async function Index() {
 				<ProjectsShowcase />
 			</TerminalSection>
 			<AboutUsSection />
-			<TerminalSection title="Mitgliedschaft" headingLevel={2}>
+			<TerminalSection title="Mitgliedschaft" headingLevel={2} id="membership">
 				<TerminalMembership />
 			</TerminalSection>
-			{/* <TerminalSection title="Unterstützt durch" headingLevel={2}>
+			<TerminalSection title="Sponsoring" headingLevel={2}>
 				<TerminalPartners />
-			</TerminalSection> */}
+			</TerminalSection>
 		</>
 	)
 }
