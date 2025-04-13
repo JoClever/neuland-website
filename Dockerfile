@@ -19,7 +19,7 @@ ENV NEXT_SHARP_PATH=/app/node_modules/sharp
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN realpath . 
 
-RUN npm run contentlayer2 build
+RUN npx contentlayer2 build
 RUN npm run build
 
 FROM node:23-alpine AS runner
