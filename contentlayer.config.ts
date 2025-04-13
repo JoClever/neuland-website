@@ -1,5 +1,5 @@
 // contentlayer.config.ts
-import { defineDocumentType, makeSource } from 'contentlayer/source-files'
+import { defineDocumentType, makeSource } from 'contentlayer2/source-files'
 import rehypeImgSize from 'rehype-img-size'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
@@ -32,7 +32,7 @@ export default makeSource({
 	contentDirPath: 'posts',
 	documentTypes: [Post],
 	markdown: {
-		remarkPlugins: [remarkGfm],
+		remarkPlugins: [[remarkGfm, { passThrough: ['link'] }]],
 		rehypePlugins: [
 			[
 				// biome-ignore lint/suspicious/noExplicitAny:

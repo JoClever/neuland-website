@@ -8,12 +8,9 @@ import {
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
 import { allPosts } from 'contentlayer/generated'
-// app/posts/[slug]/page.tsx
 import { format, parseISO } from 'date-fns'
 import { ArrowLeft, TagIcon } from 'lucide-react'
 import Link from 'next/link'
-
-console.log(allPosts)
 
 export const generateStaticParams = async () =>
 	allPosts.map((post) => ({ slug: post._raw.flattenedPath }))
