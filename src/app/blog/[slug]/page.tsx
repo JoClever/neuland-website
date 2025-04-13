@@ -61,7 +61,7 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
 						{format(parseISO(post.date), 'LLLL d, yyyy')}
 					</time>
 
-					<h1 className="text-3xl font-bold ">{post.title}</h1>
+					<h1 className="text-3xl font-bold">{post.title}</h1>
 					{post.authors && post.authors.length > 0 && (
 						<div className="mt-2 text-sm text-terminal-text/80">
 							Von {post.authors.join(', ')}
@@ -94,20 +94,20 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
 					)}
 				</div>
 				<div
-					className="[&>*]:mb-3 [&>*:last-child]:mb-0 "
+					className="[&>*]:mb-3 [&>*:last-child]:mb-0 prose-img:max-w-full"
 					// biome-ignore lint/security/noDangerouslySetInnerHtml:
 					dangerouslySetInnerHTML={{ __html: post.body.html }}
 				/>
 			</article>
 
-			<div className="border-t border-terminal-window-border pt-12 pb-12 mt-12 ">
+			<div className="pt-6 pb-6 flex justify-end">
 				<Button variant="outline" asChild className="group">
 					<Link href="/blog" className="flex items-center gap-2 no-underline">
 						<ArrowLeft
 							size={16}
 							className="group-hover:-translate-x-1 transition-transform"
 						/>
-						<span>Return to All Posts</span>
+						<span>Alle Posts</span>
 					</Link>
 				</Button>
 			</div>

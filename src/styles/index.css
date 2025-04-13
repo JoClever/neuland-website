@@ -138,6 +138,8 @@
 		font-family: var(--font-mono);
 		background-color: #000000;
 		color: #ffffff;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 
 	/* Add specific heading styles for articles */
@@ -162,6 +164,8 @@
 
 	p {
 		@apply mb-6;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 
 	a {
@@ -187,26 +191,38 @@
 
 	/* Style for inline code */
 	article :not(pre) > code {
-		@apply bg-terminal-window-border/80 text-terminal-text px-0.5  rounded  font-mono;
+		@apply bg-terminal-window-border/80 text-terminal-text px-0.5 rounded font-mono;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 
 	/* Style for code blocks */
 	article pre {
 		@apply bg-terminal-window border border-terminal-window-border rounded-md p-4 mb-6 overflow-x-auto;
+		max-width: 100%;
 	}
 
 	article pre code {
 		@apply p-0 border-none rounded-none text-sm font-mono; /* Reset inline styles */
+		white-space: pre-wrap;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 
 	/* Style for tables */
 	article table {
 		@apply w-full mb-6 border-collapse border border-terminal-window-border bg-terminal-bg/80;
+		display: block;
+		overflow-x: auto;
+		max-width: 100%;
 	}
 
 	article th,
 	article td {
 		@apply border border-terminal-window-border px-4 py-2 text-left;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+		max-width: 100%;
 	}
 
 	article th {
