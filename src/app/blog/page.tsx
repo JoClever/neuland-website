@@ -137,10 +137,13 @@ export default function Home({
 				<Button variant="outline" asChild>
 					<Link
 						href="/blog/tags"
-						className="flex items-center gap-2 no-underline"
+						className="flex items-center gap-2 no-underline group"
 					>
-						<TagIcon size={16} />
-						<span>Browse Tags</span>
+						<TagIcon
+							size={16}
+							className="transition-transform duration-300 group-hover:rotate-16"
+						/>
+						<span>Alle Tags</span>
 					</Link>
 				</Button>
 			</div>

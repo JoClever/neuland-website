@@ -64,13 +64,16 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
 					<h1 className="text-3xl font-bold ">{post.title}</h1>
 					{post.authors && post.authors.length > 0 && (
 						<div className="mt-2 text-sm text-terminal-text/80">
-							By {post.authors.join(', ')}
+							Von {post.authors.join(', ')}
 						</div>
 					)}
 
 					{post.tags && post.tags.length > 0 && (
-						<div className="mt-4 flex items-center gap-2">
-							<TagIcon size={14} className="text-terminal-text/60" />
+						<div className="mt-4 flex items-center gap-2 group">
+							<TagIcon
+								size={14}
+								className="text-terminal-text/60 transition-transform duration-300 group-hover:rotate-12 group-hover:text-terminal-text mt-1"
+							/>
 							<div className="flex flex-wrap gap-1">
 								{post.tags.map((tag) => (
 									<Link

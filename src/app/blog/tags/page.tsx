@@ -30,7 +30,7 @@ export default function TagsIndexPage() {
 	)
 
 	return (
-		<div className="mx-auto max-w-4xl">
+		<div className="mx-auto max-w-4xl mb-12">
 			<Breadcrumb>
 				<BreadcrumbList className="flex items-center">
 					<BreadcrumbItem className="flex items-center">
@@ -59,7 +59,7 @@ export default function TagsIndexPage() {
 				Blog Tags
 			</h1>
 			<p className="mb-8 text-terminal-text/70">
-				Browse all {sortedTags.length} tags from the Neuland blog
+				Durchsuche alle {sortedTags.length} Tags des Neuland Blogs
 			</p>
 
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -85,7 +85,10 @@ export default function TagsIndexPage() {
 									</span>
 								</div>
 								<span className="text-terminal-text/50 group-hover:text-terminal-cyan text-xs font-mono">
-									View →
+									View{' '}
+									<span className="inline-block transition-transform duration-300 group-hover:translate-x-0.5">
+										→
+									</span>
 								</span>
 							</div>
 						</Link>

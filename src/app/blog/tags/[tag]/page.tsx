@@ -141,17 +141,17 @@ export default function TagPage({
 					<BreadcrumbSeparator className="flex items-center mx-1" />
 					<BreadcrumbItem className="flex items-center">
 						<BreadcrumbLink className="flex items-center">
-							Tag: {displayTag}
+							#{displayTag}
 						</BreadcrumbLink>
 					</BreadcrumbItem>
 				</BreadcrumbList>
 			</Breadcrumb>
 			<h1 className="mt-4 mb-2 text-3xl font-bold text-terminal-highlight font-mono">
-				Posts tagged with "{displayTag}"
+				#{displayTag}
 			</h1>
 			<p className="mb-8 text-terminal-text/70">
 				{filteredPosts.length} {filteredPosts.length === 1 ? 'post' : 'posts'}{' '}
-				found
+				gefunden
 			</p>
 
 			{filteredPosts.length > 0 ? (

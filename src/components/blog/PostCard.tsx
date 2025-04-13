@@ -59,8 +59,11 @@ export function PostCard({ post }: PostCardProps) {
 						</p>
 					</div>
 					<div className="px-4 py-2 bg-terminal-bg border-t border-terminal-window-border mt-auto">
-						<span className="text-terminal-text/90 text-xs font-mono hover:text-terminal-cyan">
-							Read more →
+						<span className="text-terminal-text/90 text-xs font-mono group-hover:text-terminal-cyan">
+							Mehr lesen{' '}
+							<span className="inline-block transition-transform duration-300 group-hover:translate-x-0.5">
+								→
+							</span>
 						</span>
 					</div>
 				</div>
