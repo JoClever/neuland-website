@@ -78,6 +78,28 @@ const SettingsLinks: React.FC = () => {
 						className="ml-2"
 					/>
 				</li>
+				<AnimatePresence>
+					{toggleAttempts >= MAX_TOGGLE_ATTEMPTS && (
+						<motion.div
+							initial={{ opacity: 0, height: 0 }}
+							animate={{ opacity: 1, height: 'auto' }}
+							exit={{ opacity: 0, height: 0 }}
+							transition={{ duration: 0.2 }}
+							className="text-terminal-yellow text-sm mt-4 ml-6 p-2 border border-terminal-red bg-terminal-red/10 rounded overflow-hidden"
+						>
+							<motion.div
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								transition={{ delay: 0.2 }}
+							>
+								<span className="text-terminal-lightGreen">Error:</span> Light
+								mode rejected.
+								<br />
+								Real developers embrace the darkness. ;)
+							</motion.div>
+						</motion.div>
+					)}
+				</AnimatePresence>
 				<li className="mt-3 flex flex-col" ref={containerRef}>
 					<div className="flex items-center">
 						<span className="text-terminal-text mr-2">
@@ -108,28 +130,6 @@ const SettingsLinks: React.FC = () => {
 							</div>
 						)}
 					</div>
-					<AnimatePresence>
-						{toggleAttempts >= MAX_TOGGLE_ATTEMPTS && (
-							<motion.div
-								initial={{ opacity: 0, height: 0 }}
-								animate={{ opacity: 1, height: 'auto' }}
-								exit={{ opacity: 0, height: 0 }}
-								transition={{ duration: 0.2 }}
-								className="text-terminal-yellow text-sm mt-2 ml-6 p-2 border border-terminal-red bg-terminal-red/10 rounded overflow-hidden"
-							>
-								<motion.div
-									initial={{ opacity: 0 }}
-									animate={{ opacity: 1 }}
-									transition={{ delay: 0.2 }}
-								>
-									<span className="text-terminal-lightGreen">Error:</span> Light
-									mode rejected.
-									<br />
-									Real developers embrace the darkness. ;)
-								</motion.div>
-							</motion.div>
-						)}
-					</AnimatePresence>
 				</li>
 			</ul>
 		</nav>

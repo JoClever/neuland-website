@@ -20,14 +20,14 @@ About 45 participants spent 8 hours solving challenges and making new friends. I
 
 Following are the links to the writeups on the blog:
 
-* [Blue Team Writeup](https://blog.neuland-ingolstadt.de/posts/neuland-ctf-blue-team-12-2023/)
-* [Cryptography Writeup](https://blog.neuland-ingolstadt.de/posts/neuland-ctf-crypto-12-2023/)
-* [Miscellaneous Writeup](https://blog.neuland-ingolstadt.de/posts/neuland-ctf-misc-12-2023/)
-* [Open Source Intelligence Writeup](https://blog.neuland-ingolstadt.de/posts/neuland-ctf-osint-12-2023/)<br>
-* [PWN/Binary Exploitation Writeup](https://blog.neuland-ingolstadt.de/posts/neuland-ctf-pwn-12-2023/)
-* [Reverse Engineering Writeup](https://blog.neuland-ingolstadt.de/posts/neuland-ctf-rev-12-2023/)
-* [Steganography Writeup](https://blog.neuland-ingolstadt.de/posts/neuland-ctf-stego-12-2023/)
-* [Web Writeup](https://blog.neuland-ingolstadt.de/posts/neuland-ctf-web-12-2023/)
+* [Blue Team Writeup](neuland-ctf-blue-team-12-2023/)
+* [Cryptography Writeup](neuland-ctf-crypto-12-2023/)
+* [Miscellaneous Writeup](neuland-ctf-misc-12-2023/)
+* [Open Source Intelligence Writeup](neuland-ctf-osint-12-2023/)<br>
+* [PWN/Binary Exploitation Writeup](neuland-ctf-pwn-12-2023/)
+* [Reverse Engineering Writeup](neuland-ctf-rev-12-2023/)
+* [Steganography Writeup](neuland-ctf-stego-12-2023/)
+* [Web Writeup](neuland-ctf-web-12-2023/)
 
 <br>
 
