@@ -21,7 +21,7 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build Contentlayer
-        run: bunx contentlayer build
+        run: bunx contentlayer2 build
 
       - name: Run TypeScript checks
         run: bunx tsc --noEmit
