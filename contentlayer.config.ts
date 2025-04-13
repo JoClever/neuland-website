@@ -1,9 +1,9 @@
 // contentlayer.config.ts
 import { defineDocumentType, makeSource } from 'contentlayer2/source-files'
+import rehypeExternalLinks from 'rehype-external-links'
 import rehypeImgSize from 'rehype-img-size'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
-import rehypeExternalLinks from 'rehype-external-links'
 
 export const Post = defineDocumentType(() => ({
 	name: 'Post',
