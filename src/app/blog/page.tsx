@@ -1,5 +1,4 @@
 import { PostCard } from '@/components/blog/PostCard'
-import { Badge } from '@/components/ui/badge'
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -7,122 +6,180 @@ import {
 	BreadcrumbList,
 	BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import { Button } from '@/components/ui/button'
 import {
 	Pagination,
 	PaginationContent,
+	PaginationEllipsis,
 	PaginationItem,
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious
 } from '@/components/ui/pagination'
+import { allPosts } from 'contentlayer/generated'
+import { compareDesc } from 'date-fns'
+import { TagIcon } from 'lucide-react'
 import Link from 'next/link'
-import { getPosts, getTags } from './get-posts'
 
-export const metadata = {
-	title: 'Neuland Blog'
-}
-
-export default async function PostsPage({
+export default function Home({
 	searchParams
 }: {
-	searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+	searchParams: { [key: string]: string | string[] | undefined }
 }) {
-	const tags = await getTags()
-	const posts = await getPosts()
-	const allTags: Record<string, number> = Object.create(null)
+	const posts = allPosts.sort((a, b) =>
+		compareDesc(new Date(a.date), new Date(b.date))
+	)
 
-	for (const tag of tags) {
-		allTags[tag] ??= 0
-		allTags[tag] += 1
-	}
+	// Pagination logic
+	const POSTS_PER_PAGE = 12
+	const currentPage = Number(searchParams.page) || 1
+	const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE)
 
-	const page = Number((await searchParams).page || '1')
-	const postsPerPage = 12
-	const totalPages = Math.ceil(posts.length / postsPerPage)
-	const startIndex = (page - 1) * postsPerPage
-	const endIndex = startIndex + postsPerPage
-	const paginatedPosts = posts.slice(startIndex, endIndex)
+	const paginatedPosts = posts.slice(
+		(currentPage - 1) * POSTS_PER_PAGE,
+		currentPage * POSTS_PER_PAGE
+	)
 
+	// Function to generate pagination items
 	const generatePaginationItems = () => {
 		const items = []
-		// Generate all page numbers without ellipses
-		for (let i = 1; i <= totalPages; i++) {
-			items.push(i)
+
+		// Always show first page
+		items.push(
+			<PaginationItem key="page-1">
+				<PaginationLink href="/blog?page=1" isActive={currentPage === 1}>
+					1
+				</PaginationLink>
+			</PaginationItem>
+		)
+
+		// Show ellipsis if needed
+		if (currentPage > 3) {
+			items.push(
+				<PaginationItem key="ellipsis-1">
+					<PaginationEllipsis />
+				</PaginationItem>
+			)
 		}
+
+		// Show pages around current page
+		for (
+			let i = Math.max(2, currentPage - 1);
+			i <= Math.min(totalPages - 1, currentPage + 1);
+			i++
+		) {
+			if (i <= currentPage + 1 && i >= currentPage - 1) {
+				items.push(
+					<PaginationItem key={`page-${i}`}>
+						<PaginationLink
+							href={`/blog?page=${i}`}
+							isActive={currentPage === i}
+						>
+							{i}
+						</PaginationLink>
+					</PaginationItem>
+				)
+			}
+		}
+
+		// Show ellipsis if needed
+		if (currentPage < totalPages - 2) {
+			items.push(
+				<PaginationItem key="ellipsis-2">
+					<PaginationEllipsis />
+				</PaginationItem>
+			)
+		}
+
+		// Always show last page if there are more than 1 page
+		if (totalPages > 1) {
+			items.push(
+				<PaginationItem key={`page-${totalPages}`}>
+					<PaginationLink
+						href={`/blog?page=${totalPages}`}
+						isActive={currentPage === totalPages}
+					>
+						{totalPages}
+					</PaginationLink>
+				</PaginationItem>
+			)
+		}
+
 		return items
 	}
 
-	const paginationItems = generatePaginationItems()
-
 	return (
-		<>
-			<Breadcrumb className="-ml-[1.625em] no-underline">
+		<div className="mx-auto max-w-4xl">
+			<Breadcrumb>
 				<BreadcrumbList className="flex items-center">
 					<BreadcrumbItem className="flex items-center">
 						<BreadcrumbLink asChild className="flex items-center">
 							<Link href="/" className="flex items-center">
-								root
+								Home
 							</Link>
 						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator className="flex items-center mx-1" />
 					<BreadcrumbItem className="flex items-center">
-						<BreadcrumbLink className="flex items-center">Blog</BreadcrumbLink>
+						<BreadcrumbLink asChild className="flex items-center">
+							<Link href="/blog" className="flex items-center">
+								Blog
+							</Link>
+						</BreadcrumbLink>
 					</BreadcrumbItem>
 				</BreadcrumbList>
 			</Breadcrumb>
 
-			<header className="mb-12 mt-2">
-				<h1 className="text-4xl font-bold text-terminal-highlight mb-6 font-mono">
-					{metadata.title}
+			<div className="flex justify-between items-center mt-4 mb-8">
+				<h1 className="text-3xl font-bold text-terminal-highlight font-mono">
+					Neuland Blog
 				</h1>
-				<div className="not-prose flex flex-wrap gap-2 mb-8">
-					{Object.entries(allTags).map(([tag, count]) => (
-						<Link key={tag} href={`/blog/tags/${tag}`} className="no-underline">
-							<Badge
-								variant="outline"
-								className="cursor-pointer hover:bg-terminal-window-border text-sm"
-							>
-								{tag} <span className="font-semibold">({count})</span>
-							</Badge>
-						</Link>
-					))}
-				</div>
-			</header>
-			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-				{paginatedPosts.map((post) => (
-					<PostCard key={post.route} post={post} />
+				<Button variant="outline" asChild>
+					<Link
+						href="/blog/tags"
+						className="flex items-center gap-2 no-underline"
+					>
+						<TagIcon size={16} />
+						<span>Browse Tags</span>
+					</Link>
+				</Button>
+			</div>
+
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
+				{paginatedPosts.map((post, idx) => (
+					<PostCard post={post} key={idx} />
 				))}
 			</div>
 
 			{totalPages > 1 && (
-				<Pagination className="mt-12">
+				<Pagination className="my-12">
 					<PaginationContent>
-						{page > 1 && (
-							<PaginationItem>
-								<PaginationPrevious href={`/blog?page=${page - 1}`} />
-							</PaginationItem>
-						)}
+						<PaginationItem>
+							<PaginationPrevious
+								href={`/blog?page=${currentPage > 1 ? currentPage - 1 : 1}`}
+								aria-disabled={currentPage === 1}
+								className={
+									currentPage === 1 ? 'pointer-events-none opacity-50' : ''
+								}
+							/>
+						</PaginationItem>
 
-						{paginationItems.map((item) => (
-							<PaginationItem key={`page-${item}`}>
-								<PaginationLink
-									href={`/blog?page=${item}`}
-									isActive={page === item}
-								>
-									{item}
-								</PaginationLink>
-							</PaginationItem>
-						))}
+						{generatePaginationItems()}
 
-						{page < totalPages && (
-							<PaginationItem>
-								<PaginationNext href={`/blog?page=${page + 1}`} />
-							</PaginationItem>
-						)}
+						<PaginationItem>
+							<PaginationNext
+								href={`/blog?page=${currentPage < totalPages ? currentPage + 1 : totalPages}`}
+								aria-disabled={currentPage === totalPages}
+								className={
+									currentPage === totalPages
+										? 'pointer-events-none opacity-50'
+										: ''
+								}
+							/>
+						</PaginationItem>
 					</PaginationContent>
 				</Pagination>
 			)}
-		</>
+		</div>
 	)
 }

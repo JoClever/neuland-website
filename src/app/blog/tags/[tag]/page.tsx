@@ -9,66 +9,119 @@ import {
 import {
 	Pagination,
 	PaginationContent,
+	PaginationEllipsis,
 	PaginationItem,
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious
 } from '@/components/ui/pagination'
+import { allPosts } from 'contentlayer/generated'
+import { compareDesc } from 'date-fns'
 import Link from 'next/link'
-import { getPosts, getTags } from '../../get-posts'
 
-export async function generateMetadata(props: { params: { tag: string } }) {
-	return {
-		title: `Posts Tagged with "${decodeURIComponent(props.params.tag)}"`
-	}
-}
-
-export async function generateStaticParams() {
-	const allTags = await getTags()
-	return [...new Set(allTags)].map((tag) => ({ tag }))
-}
-
-// Update the component's type definition to match Next.js App Router expectations
-interface TagPageProps {
-	params: {
-		tag: string
-	}
-	searchParams?: {
-		[key: string]: string | string[] | undefined
-	}
-}
-
-export default async function TagPage({
+export default function TagPage({
 	params,
-	searchParams = {}
-}: TagPageProps) {
-	const posts = await getPosts()
-	const decodedTag = decodeURIComponent(params.tag)
+	searchParams
+}: {
+	params: { tag: string }
+	searchParams: { [key: string]: string | string[] | undefined }
+}) {
+	const tag = decodeURIComponent(params.tag)
 
-	const taggedPosts = posts.filter((post) =>
-		post.frontMatter.tags.includes(decodedTag)
+	// Filter posts by tag (case insensitive comparison)
+	const filteredPosts = allPosts
+		.filter((post) =>
+			post.tags?.some((postTag) => postTag.toLowerCase() === tag.toLowerCase())
+		)
+		.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
+
+	// Pagination logic
+	const POSTS_PER_PAGE = 12
+	const currentPage = Number(searchParams.page) || 1
+	const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
+
+	const paginatedPosts = filteredPosts.slice(
+		(currentPage - 1) * POSTS_PER_PAGE,
+		currentPage * POSTS_PER_PAGE
 	)
 
-	const page = Number(searchParams.page || '1')
-	const postsPerPage = 12
-	const totalPages = Math.ceil(taggedPosts.length / postsPerPage)
-	const startIndex = (page - 1) * postsPerPage
-	const endIndex = startIndex + postsPerPage
-	const paginatedPosts = taggedPosts.slice(startIndex, endIndex)
-
+	// Function to generate pagination items
 	const generatePaginationItems = () => {
 		const items = []
-		for (let i = 1; i <= totalPages; i++) {
-			items.push(i)
+
+		// Always show first page
+		items.push(
+			<PaginationItem key="page-1">
+				<PaginationLink
+					href={`/blog/tags/${params.tag}?page=1`}
+					isActive={currentPage === 1}
+				>
+					1
+				</PaginationLink>
+			</PaginationItem>
+		)
+
+		// Show ellipsis if needed
+		if (currentPage > 3) {
+			items.push(
+				<PaginationItem key="ellipsis-1">
+					<PaginationEllipsis />
+				</PaginationItem>
+			)
 		}
+
+		// Show pages around current page
+		for (
+			let i = Math.max(2, currentPage - 1);
+			i <= Math.min(totalPages - 1, currentPage + 1);
+			i++
+		) {
+			if (i <= currentPage + 1 && i >= currentPage - 1) {
+				items.push(
+					<PaginationItem key={`page-${i}`}>
+						<PaginationLink
+							href={`/blog/tags/${params.tag}?page=${i}`}
+							isActive={currentPage === i}
+						>
+							{i}
+						</PaginationLink>
+					</PaginationItem>
+				)
+			}
+		}
+
+		// Show ellipsis if needed
+		if (currentPage < totalPages - 2) {
+			items.push(
+				<PaginationItem key="ellipsis-2">
+					<PaginationEllipsis />
+				</PaginationItem>
+			)
+		}
+
+		// Always show last page if there are more than 1 page
+		if (totalPages > 1) {
+			items.push(
+				<PaginationItem key={`page-${totalPages}`}>
+					<PaginationLink
+						href={`/blog/tags/${params.tag}?page=${totalPages}`}
+						isActive={currentPage === totalPages}
+					>
+						{totalPages}
+					</PaginationLink>
+				</PaginationItem>
+			)
+		}
+
 		return items
 	}
 
-	const paginationItems = generatePaginationItems()
+	// Display tag name with proper capitalization for title
+	const displayTag = tag.charAt(0).toUpperCase() + tag.slice(1)
 
 	return (
-		<>
-			<Breadcrumb className="-ml-[1.625em] no-underlin">
+		<div className="mx-auto max-w-4xl">
+			<Breadcrumb>
 				<BreadcrumbList className="flex items-center">
 					<BreadcrumbItem className="flex items-center">
 						<BreadcrumbLink asChild className="flex items-center">
@@ -88,55 +141,70 @@ export default async function TagPage({
 					<BreadcrumbSeparator className="flex items-center mx-1" />
 					<BreadcrumbItem className="flex items-center">
 						<BreadcrumbLink className="flex items-center">
-							Tag: {decodedTag}
+							Tag: {displayTag}
 						</BreadcrumbLink>
 					</BreadcrumbItem>
 				</BreadcrumbList>
 			</Breadcrumb>
+			<h1 className="mt-4 mb-2 text-3xl font-bold text-terminal-highlight font-mono">
+				Posts tagged with "{displayTag}"
+			</h1>
+			<p className="mb-8 text-terminal-text/70">
+				{filteredPosts.length} {filteredPosts.length === 1 ? 'post' : 'posts'}{' '}
+				found
+			</p>
 
-			<div className="mb-12">
-				<h1 className="text-3xl font-bold mb-2">#{decodedTag}</h1>
-				<p>Posts tagged with "{decodedTag}"</p>
-			</div>
-
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-				{paginatedPosts.map((post) => (
-					<PostCard key={post.route} post={post} />
-				))}
-			</div>
-
-			{totalPages > 1 && (
-				<Pagination className="mt-12">
-					<PaginationContent>
-						{page > 1 && (
-							<PaginationItem>
-								<PaginationPrevious
-									href={`/blog/tags/${params.tag}?page=${page - 1}`}
-								/>
-							</PaginationItem>
-						)}
-
-						{paginationItems.map((item) => (
-							<PaginationItem key={`page-${item}`}>
-								<PaginationLink
-									href={`/blog/tags/${params.tag}?page=${item}`}
-									isActive={page === item}
-								>
-									{item}
-								</PaginationLink>
-							</PaginationItem>
+			{filteredPosts.length > 0 ? (
+				<>
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+						{paginatedPosts.map((post, idx) => (
+							<PostCard post={post} key={idx} />
 						))}
+					</div>
 
-						{page < totalPages && (
-							<PaginationItem>
-								<PaginationNext
-									href={`/blog/tags/${params.tag}?page=${page + 1}`}
-								/>
-							</PaginationItem>
-						)}
-					</PaginationContent>
-				</Pagination>
+					{totalPages > 1 && (
+						<Pagination className="my-12">
+							<PaginationContent>
+								<PaginationItem>
+									<PaginationPrevious
+										href={`/blog/tags/${params.tag}?page=${currentPage > 1 ? currentPage - 1 : 1}`}
+										aria-disabled={currentPage === 1}
+										className={
+											currentPage === 1 ? 'pointer-events-none opacity-50' : ''
+										}
+									/>
+								</PaginationItem>
+
+								{generatePaginationItems()}
+
+								<PaginationItem>
+									<PaginationNext
+										href={`/blog/tags/${params.tag}?page=${currentPage < totalPages ? currentPage + 1 : totalPages}`}
+										aria-disabled={currentPage === totalPages}
+										className={
+											currentPage === totalPages
+												? 'pointer-events-none opacity-50'
+												: ''
+										}
+									/>
+								</PaginationItem>
+							</PaginationContent>
+						</Pagination>
+					)}
+				</>
+			) : (
+				<div className="text-center py-12">
+					<p className="text-lg text-terminal-text/70">
+						No posts found with this tag.
+					</p>
+					<Link
+						href="/blog"
+						className="mt-4 inline-block text-terminal-cyan hover:underline"
+					>
+						Back to all posts
+					</Link>
+				</div>
 			)}
-		</>
+		</div>
 	)
 }

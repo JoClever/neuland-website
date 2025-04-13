@@ -12,7 +12,8 @@
 			"dist/",
 			".next/",
 			"tsconfig.json",
-			"public/files/"
+			"public/files/",
+			".contentlayer/"
 		]
 	},
 	"formatter": {
