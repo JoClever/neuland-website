@@ -118,7 +118,9 @@ const CalendarModal: React.FC<CalendarModalProps> = ({
 							</div>
 						</div>
 
-						<h3 className="text-lg text-terminal-cyan mb-2">So gehts:</h3>
+						<h3 className="text-lg text-terminal-cyan mb-2 font-bold">
+							So gehts:
+						</h3>
 						<ul className="list-disc list-inside space-y-2 mb-6">
 							<li>Kopiere die URL</li>
 							<li>Öffne deine Kalender App</li>
