@@ -53,5 +53,11 @@
 		"tailwindcss-animate": "^1.0.7",
 		"typescript": "^5.8.3"
 	},
-	"trustedDependencies": ["@biomejs/biome"]
+	"trustedDependencies": [
+		"@biomejs/biome",
+		"contentlayer2",
+		"esbuild",
+		"protobufjs",
+		"sharp"
+	]
 }
