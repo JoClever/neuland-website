@@ -3,6 +3,7 @@ import { defineDocumentType, makeSource } from 'contentlayer2/source-files'
 import rehypeImgSize from 'rehype-img-size'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
+import rehypeExternalLinks from 'rehype-external-links'
 
 export const Post = defineDocumentType(() => ({
 	name: 'Post',
@@ -45,7 +46,8 @@ export default makeSource({
 				}
 			],
 			// biome-ignore lint/suspicious/noExplicitAny:
-			[rehypeImgSize as any, { dir: 'public' }]
+			[rehypeImgSize as any, { dir: 'public' }],
+			[rehypeExternalLinks, { target: '_blank', rel: 'noopener' }]
 		]
 	}
 })
