@@ -100,7 +100,8 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({
 	const renderContent = (content: string, docIndex: number) => (
 		<ReactMarkdown
 			remarkPlugins={[remarkGfm]}
-			rehypePlugins={[rehypeStringify, rehypeFormat, rehypeCustomLists]}
+			// biome-ignore lint/suspicious/noExplicitAny:
+			rehypePlugins={[rehypeStringify as any, rehypeFormat, rehypeCustomLists]}
 			components={{
 				h1: ({ children }) => {
 					const id =
