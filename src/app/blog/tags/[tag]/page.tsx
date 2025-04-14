@@ -19,14 +19,14 @@ import { allPosts } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
 import Link from 'next/link'
 
-export default function TagPage({
+export default async function TagPage({
 	params,
 	searchParams
 }: {
 	params: { tag: string }
 	searchParams: { [key: string]: string | string[] | undefined }
 }) {
-	const tag = decodeURIComponent(params.tag)
+	const tag = decodeURIComponent(await params.tag)
 
 	// Filter posts by tag (case insensitive comparison)
 	const filteredPosts = allPosts
@@ -37,7 +37,7 @@ export default function TagPage({
 
 	// Pagination logic
 	const POSTS_PER_PAGE = 12
-	const currentPage = Number(searchParams.page) || 1
+	const currentPage = Number(await searchParams.page) || 1
 	const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
 
 	const paginatedPosts = filteredPosts.slice(
@@ -53,7 +53,7 @@ export default function TagPage({
 		items.push(
 			<PaginationItem key="page-1">
 				<PaginationLink
-					href={`/blog/tags/${params.tag}?page=1`}
+					href={`/blog/tags/${tag}?page=1`}
 					isActive={currentPage === 1}
 				>
 					1
@@ -80,7 +80,7 @@ export default function TagPage({
 				items.push(
 					<PaginationItem key={`page-${i}`}>
 						<PaginationLink
-							href={`/blog/tags/${params.tag}?page=${i}`}
+							href={`/blog/tags/${tag}?page=${i}`}
 							isActive={currentPage === i}
 						>
 							{i}
@@ -104,7 +104,7 @@ export default function TagPage({
 			items.push(
 				<PaginationItem key={`page-${totalPages}`}>
 					<PaginationLink
-						href={`/blog/tags/${params.tag}?page=${totalPages}`}
+						href={`/blog/tags/${tag}?page=${totalPages}`}
 						isActive={currentPage === totalPages}
 					>
 						{totalPages}
@@ -167,7 +167,7 @@ export default function TagPage({
 							<PaginationContent>
 								<PaginationItem>
 									<PaginationPrevious
-										href={`/blog/tags/${params.tag}?page=${currentPage > 1 ? currentPage - 1 : 1}`}
+										href={`/blog/tags/${tag}?page=${currentPage > 1 ? currentPage - 1 : 1}`}
 										aria-disabled={currentPage === 1}
 										className={
 											currentPage === 1 ? 'pointer-events-none opacity-50' : ''
@@ -179,7 +179,7 @@ export default function TagPage({
 
 								<PaginationItem>
 									<PaginationNext
-										href={`/blog/tags/${params.tag}?page=${currentPage < totalPages ? currentPage + 1 : totalPages}`}
+										href={`/blog/tags/${tag}?page=${currentPage < totalPages ? currentPage + 1 : totalPages}`}
 										aria-disabled={currentPage === totalPages}
 										className={
 											currentPage === totalPages
