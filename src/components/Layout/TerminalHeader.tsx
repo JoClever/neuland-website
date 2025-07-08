@@ -78,6 +78,7 @@ const TerminalHeader: React.FC = () => {
 		},
 		{ name: 'Projekte', href: '/projects', isPage: true },
 		{ name: 'Blog', href: '/blog', isPage: true },
+		{ name: 'Branding', href: '/branding', isPage: true },
 		{
 			name: 'Login',
 			href: 'https://wiki.informatik.sexy/books/einfuhrung/page/willkommen',
