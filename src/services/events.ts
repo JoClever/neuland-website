@@ -84,6 +84,18 @@ export const fetchEvents = async (): Promise<{
 
 		const responseData = await response.json()
 
+		function getSemesterFromDate(date: moment.Moment): string {
+			const year = date.year()
+			const month = date.month() + 1 // moment months are 0-based
+
+			if (month >= 4 && month <= 9) {
+				return `SS ${year}`
+			}
+			const winterYear = month <= 3 ? year - 1 : year
+			const winterYearNext = month <= 3 ? year : year + 1
+			return `WS ${winterYear}/${winterYearNext.toString().slice(-2)}`
+		}
+
 		const events = responseData.map((event: PublicEventResponse): Event => {
 			moment.locale('de')
 
@@ -102,47 +114,48 @@ export const fetchEvents = async (): Promise<{
 			}
 		})
 
-		const currentMonth = new Date().getMonth() + 1
-		const currentYear = new Date().getFullYear()
-		const semester =
-			currentMonth >= 4 && currentMonth <= 9
-				? `SS ${currentYear}`
-				: `WS ${
-						currentMonth <= 3 ? currentYear - 1 : currentYear
-					}/${(currentMonth <= 3 ? currentYear : currentYear + 1)
-						.toString()
-						.slice(2)}`
+		const filteredEvents = events
+			.filter((event: Event) => {
+				if (!event.nextOccurrence) return false
+				const nextDate = new Date(event.nextOccurrence)
+				return nextDate >= new Date()
+			})
+			.sort((a: Event, b: Event) => {
+				const dateAValid = a.nextOccurrence !== ''
+				const dateBValid = b.nextOccurrence !== ''
+
+				if (!dateAValid && !dateBValid) {
+					return a.title.localeCompare(b.title)
+				}
+
+				if (!dateAValid) return 1
+				if (!dateBValid) return -1
+
+				const dateA = new Date(a.nextOccurrence)
+				const dateB = new Date(b.nextOccurrence)
+
+				if (dateA < dateB) {
+					return -1
+				}
+				if (dateA > dateB) {
+					return 1
+				}
+				return 0
+			})
+
+		// Determine semester based on first event or fallback to current date
+		let semester: string
+		if (filteredEvents.length > 0 && filteredEvents[0].nextOccurrence) {
+			const firstEventDate = moment(filteredEvents[0].nextOccurrence)
+			semester = getSemesterFromDate(firstEventDate)
+		} else {
+			const now = moment()
+			semester = getSemesterFromDate(now)
+		}
 
 		const result = {
 			semester,
-			events: events
-				.filter((event: Event) => {
-					if (!event.nextOccurrence) return false
-					const nextDate = new Date(event.nextOccurrence)
-					return nextDate >= new Date()
-				})
-				.sort((a: Event, b: Event) => {
-					const dateAValid = a.nextOccurrence !== ''
-					const dateBValid = b.nextOccurrence !== ''
-
-					if (!dateAValid && !dateBValid) {
-						return a.title.localeCompare(b.title)
-					}
-
-					if (!dateAValid) return 1
-					if (!dateBValid) return -1
-
-					const dateA = new Date(a.nextOccurrence)
-					const dateB = new Date(b.nextOccurrence)
-
-					if (dateA < dateB) {
-						return -1
-					}
-					if (dateA > dateB) {
-						return 1
-					}
-					return 0
-				})
+			events: filteredEvents
 		}
 
 		cachedEvents = result
