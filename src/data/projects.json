@@ -110,7 +110,21 @@
 		"longDescription": "Die Neuland API ist das Herzstück unserer THI-Projekte. Egal ob für Mensa, Campus Events oder Hochschulsport - sie ist die zentrale Anlaufstelle für alle Daten und Informationen, die unsere Anwendungen benötigen.",
 		"additionalInfo": "Die API ist in Node.js als GraphQL-Server implementiert und bietet eine flexible und leistungsstarke Schnittstelle für unsere Frontend-Anwendungen."
 	},
-
+	{
+		"id": "campus-life-events",
+		"title": "Campus Life Events",
+		"description": "Plattform für die Vereine der THI zur Planung, Veröffentlichung und Bewerbung ihrer Events.",
+		"links": [
+			{
+				"label": "GitHub",
+				"url": "https://github.com/neuland-ingolstadt/campus-life-events"
+			}
+		],
+		"imageUrl": "/assets/cle.webp",
+		"tags": ["Rust", "Next.js", "TypeScript"],
+		"longDescription": "Campus Life Events ist das Dashboard für die Vereine der THI: Eine gemeinsame Oberfläche für alle studentischen Organisationen, um Events zentral zu koordinieren und zu veröffentlichen. Events erscheinen direkt in der Neuland App, können per Kalender-Abo abonniert und über den studentischen Newsletter automatisch weitergegeben werden.",
+		"additionalInfo": "Die Plattform basiert auf einem modernen Rust/Axum‑Backend mit PostgreSQL und Redis sowie einem Next.js‑Frontend und läuft in unserer Kubernetes‑Umgebung."
+	},
 	{
 		"id": "neuland-website",
 		"title": "Neuland Website",
