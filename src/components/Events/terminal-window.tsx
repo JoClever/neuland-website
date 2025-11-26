@@ -245,10 +245,33 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
 					terminalState === 'starting-up' ? 'terminal-startup' : ''
 				} ${restoreBackground ? 'terminal-bg-visible' : ''}`}
 				style={{
-					background: isTransparentBg ? 'transparent' : undefined,
-					borderRadius: '0.375rem'
+					background: isTransparentBg ? 'transparent' : undefined
 				}}
 			>
+				{/* Corner accent brackets - only show when terminal is on */}
+				{terminalState === 'on' && !isTransparentBg && (
+					<>
+						<div className="absolute top-0 left-0 w-12 h-12 pointer-events-none z-0">
+							<div className="absolute top-0 left-0 w-6 h-px bg-terminal-cyan/30" />
+							<div className="absolute top-0 left-0 w-px h-6 bg-terminal-cyan/30" />
+						</div>
+						<div className="absolute top-0 right-0 w-12 h-12 pointer-events-none z-0">
+							<div className="absolute top-0 right-0 w-6 h-px bg-terminal-cyan/30" />
+							<div className="absolute top-0 right-0 w-px h-6 bg-terminal-cyan/30" />
+						</div>
+						<div className="absolute bottom-0 left-0 w-12 h-12 pointer-events-none z-0">
+							<div className="absolute bottom-0 left-0 w-6 h-px bg-terminal-cyan/30" />
+							<div className="absolute bottom-0 left-0 w-px h-6 bg-terminal-cyan/30" />
+						</div>
+						<div className="absolute bottom-0 right-0 w-12 h-12 pointer-events-none z-0">
+							<div className="absolute bottom-0 right-0 w-6 h-px bg-terminal-cyan/30" />
+							<div className="absolute bottom-0 right-0 w-px h-6 bg-terminal-cyan/30" />
+						</div>
+						{/* Subtle inner glow */}
+						<div className="absolute inset-0 bg-gradient-to-b from-terminal-cyan/3 via-transparent to-transparent pointer-events-none z-0" />
+					</>
+				)}
+
 				<div
 					className="confetti-container"
 					style={{
@@ -277,7 +300,7 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({
 
 				{terminalState === 'shutting-down' && createStaticNoise()}
 
-				<div className="bg-terminal-windowTitle text-terminal-text px-4 py-2 flex items-center overflow-hidden rounded-t-md">
+				<div className="bg-terminal-windowTitle text-terminal-text px-4 py-2 flex items-center overflow-hidden">
 					<TerminalWindowButtons
 						onButtonClick={handleButtonClick}
 						animationInProgress={animationInProgress}

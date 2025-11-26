@@ -15,7 +15,7 @@ const StickyNote: React.FC<StickyNoteProps> = ({
 
 	return (
 		<div className="group absolute sm:top-9 sm:-right-4 sm:rotate-6 bottom-[-30px] right-0 rotate-3 z-10 pointer-events-auto w-[120px] h-[110px] bg-terminal-paper shadow-md overflow-hidden rounded-sm">
-			<div className="absolute -bottom-4 -right-4 w-12 h-12 bg-terminal-paper-text/20 shadow-inner transform rotate-45" />
+			<div className="absolute -bottom-4 -right-4 w-12 h-12 bg-terminal-paper-text/2 shadow-inner transform rotate-45" />
 
 			<div className="relative p-3 text-center text-terminal-paper-text leading-tight font-semibold mt-1.5">
 				{message}
@@ -23,7 +23,7 @@ const StickyNote: React.FC<StickyNoteProps> = ({
 					{importantText}
 				</span>
 			</div>
-			<div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-10 h-3 bg-terminal-paper-text/30" />
+			<div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-10 h-3 bg-terminal-paper-text/10" />
 		</div>
 	)
 }

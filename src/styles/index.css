@@ -372,7 +372,7 @@
 	}
 
 	.terminal-window {
-		@apply bg-terminal-window border border-terminal-window-border rounded-md mb-8;
+		@apply bg-terminal-window border border-terminal-window-border mb-8;
 	}
 
 	/* Style for inline code */
