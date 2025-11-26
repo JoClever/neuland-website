@@ -75,7 +75,7 @@ const AboutUsSection: React.FC = () => {
 								whileInView={{ opacity: 1, y: 0 }}
 								transition={{ duration: 0.5, delay: idx * 0.1 }}
 								viewport={{ once: true }}
-								className={`relative p-6 flex flex-col h-full group transition-all duration-200 ${idx < features.length - 1 ? 'border-r border-terminal-window-border' : ''}`}
+								className={`relative p-6 flex flex-col h-full group ${idx < features.length - 1 ? 'border-r border-terminal-window-border' : ''}`}
 							>
 								{/* Hover background accent, similar to NextAppShowcase feature items */}
 								<div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-terminal-cyan/3 via-terminal-cyan/1 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />

@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { type JSX, memo } from 'react'
 
 interface FeatureItemProps {
@@ -12,12 +11,8 @@ interface FeatureItemProps {
 const FeatureItem = memo(
 	({ icon, title, description, isLastInRow, isLastRow }: FeatureItemProps) => {
 		return (
-			<motion.div
-				initial={{ opacity: 0 }}
-				whileInView={{ opacity: 1 }}
-				transition={{ duration: 0.4 }}
-				viewport={{ once: true }}
-				className={`relative p-6 flex flex-col h-full group transition-all duration-300 overflow-hidden ${!isLastInRow ? 'border-r border-terminal-window-border' : ''} ${
+			<div
+				className={`relative p-6 flex flex-col h-full group overflow-hidden ${!isLastInRow ? 'border-r border-terminal-window-border' : ''} ${
 					!isLastRow ? 'border-b border-terminal-window-border' : ''
 				}`}
 			>
@@ -43,7 +38,7 @@ const FeatureItem = memo(
 						{description}
 					</p>
 				</div>
-			</motion.div>
+			</div>
 		)
 	}
 )

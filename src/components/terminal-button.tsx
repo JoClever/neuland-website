@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type React from 'react'
 
 interface TerminalButtonProps {
@@ -27,8 +28,31 @@ const TerminalButton: React.FC<TerminalButtonProps> = ({
 	const content = <span className="flex items-center gap-2">{children}</span>
 
 	if (href) {
+		// Check if it's an external link
+		const isExternal =
+			href.startsWith('http://') ||
+			href.startsWith('https://') ||
+			href.startsWith('mailto:') ||
+			href.startsWith('tel:') ||
+			target === '_blank'
+
+		if (isExternal) {
+			return (
+				<a
+					href={href}
+					className={styles}
+					onClick={onClick}
+					target={target}
+					rel={rel}
+				>
+					{content}
+				</a>
+			)
+		}
+
+		// Use Next.js Link for internal links
 		return (
-			<a
+			<Link
 				href={href}
 				className={styles}
 				onClick={onClick}
@@ -36,7 +60,7 @@ const TerminalButton: React.FC<TerminalButtonProps> = ({
 				rel={rel}
 			>
 				{content}
-			</a>
+			</Link>
 		)
 	}
 

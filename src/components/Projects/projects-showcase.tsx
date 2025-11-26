@@ -1,29 +1,22 @@
 'use client'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import type React from 'react'
-import { memo, useCallback, useMemo, useState } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import projectsData from '@/data/projects.json'
 import TerminalButton from '../terminal-button'
 import ProjectCard, { type ProjectDetails } from './project-card'
-import ProjectDetailModal from './project-detail-modal'
 
 const ProjectsShowcase: React.FC = () => {
-	const [selectedProject, setSelectedProject] = useState<ProjectDetails | null>(
-		null
-	)
-	const [isModalOpen, setIsModalOpen] = useState(false)
-
+	const router = useRouter()
 	const memoizedProjects = useMemo(() => projectsData.slice(0, 3), [])
 
-	const openProjectDetails = useCallback((project: ProjectDetails) => {
-		setSelectedProject(project)
-		setIsModalOpen(true)
-	}, [])
-
-	const closeProjectDetails = useCallback(() => {
-		setIsModalOpen(false)
-		setTimeout(() => setSelectedProject(null), 300)
-	}, [])
+	const openProjectDetails = useCallback(
+		(project: ProjectDetails) => {
+			router.push(`/projects/${project.id}`)
+		},
+		[router]
+	)
 
 	return (
 		<div className="relative">
@@ -63,13 +56,6 @@ const ProjectsShowcase: React.FC = () => {
 				</div>
 				<TerminalButton href="/projects">Alle Projekte anzeigen</TerminalButton>
 			</div>
-
-			{/* Project detail modal */}
-			<ProjectDetailModal
-				project={selectedProject}
-				isOpen={isModalOpen}
-				onClose={closeProjectDetails}
-			/>
 		</div>
 	)
 }

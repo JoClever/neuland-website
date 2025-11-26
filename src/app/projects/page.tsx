@@ -1,11 +1,11 @@
 'use client'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Code, Filter, Github } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useMemo, useState } from 'react'
 import ProjectCard, {
 	type ProjectDetails
 } from '@/components/Projects/project-card'
-import ProjectDetailModal from '@/components/Projects/project-detail-modal'
 import TerminalButton from '@/components/terminal-button'
 import projectsData from '@/data/projects.json'
 
@@ -17,10 +17,7 @@ const uniqueTags = (projectsData as ProjectDetails[]).reduce((acc, project) => {
 }, new Set<string>())
 
 const ProjectsPage = () => {
-	const [selectedProject, setSelectedProject] = useState<ProjectDetails | null>(
-		null
-	)
-	const [isModalOpen, setIsModalOpen] = useState(false)
+	const router = useRouter()
 	const [activeTag, setActiveTag] = useState<string | null>(null)
 
 	const filteredProjects = useMemo(() => {
@@ -32,13 +29,7 @@ const ProjectsPage = () => {
 	}, [activeTag])
 
 	const openProjectDetails = (project: ProjectDetails) => {
-		setSelectedProject(project)
-		setIsModalOpen(true)
-	}
-
-	const closeProjectDetails = () => {
-		setIsModalOpen(false)
-		setTimeout(() => setSelectedProject(null), 300)
+		router.push(`/projects/${project.id}`)
 	}
 
 	return (
@@ -182,13 +173,6 @@ const ProjectsPage = () => {
 					</TerminalButton>
 				</div>
 			</motion.div>
-
-			{/* Modal */}
-			<ProjectDetailModal
-				project={selectedProject}
-				isOpen={isModalOpen}
-				onClose={closeProjectDetails}
-			/>
 		</div>
 	)
 }
