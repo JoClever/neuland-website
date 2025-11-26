@@ -25,7 +25,7 @@ export const BackgroundProvider: React.FC<{ children: React.ReactNode }> = ({
 
 	useEffect(() => {
 		const savedType = localStorage.getItem(
-			'backgroundType'
+			'backgroundTypeV2'
 		) as BackgroundType | null
 		if (savedType && (savedType === 'simple' || savedType === 'gameOfLife')) {
 			setBackgroundTypeState(savedType)

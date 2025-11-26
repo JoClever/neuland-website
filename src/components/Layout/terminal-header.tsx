@@ -204,7 +204,7 @@ const TerminalHeader: React.FC = () => {
 				ref={headerRef}
 				className="terminal-nav fixed top-0 left-0 right-0 z-50 border-b border-terminal-window-border/80 bg-terminal-bg/80 py-3 backdrop-blur-md"
 			>
-				<div className="container mx-auto flex items-center justify-between px-4 sm:px-6">
+				<div className="container mx-auto flex items-center justify-between px-4 py-1 sm:px-6">
 					<div className="terminal-logo flex flex-col items-start">
 						<Link
 							href="/"
