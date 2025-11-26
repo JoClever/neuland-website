@@ -77,7 +77,7 @@ const ThemeToggle: React.FC = () => {
 				type="button"
 				onClick={cycleMode}
 				aria-label="Theme switch"
-				className="relative inline-flex h-8 w-8 items-center justify-center border border-terminal-window-border/70 bg-terminal-bg/30 backdrop-blur-sm shadow-sm cursor-pointer select-none group overflow-hidden"
+				className="relative inline-flex h-8 w-8 items-center justify-center border border-terminal-window-border/70 bg-terminal-bg/40 backdrop-blur-sm shadow-sm cursor-pointer select-none group overflow-hidden"
 			>
 				{/* corner accents, matching cards */}
 				<div className="pointer-events-none absolute inset-0">
@@ -96,7 +96,7 @@ const ThemeToggle: React.FC = () => {
 
 				<span
 					key={mode}
-					className="relative z-10 flex items-center justify-center text-[11px] font-mono text-terminal-text/70 transition-transform duration-150 ease-out group-active:translate-x-[1px]"
+					className="relative z-10 flex items-center justify-center text-[11px] font-mono text-terminal-text/90 transition-transform duration-150 ease-out group-active:translate-x-[1px]"
 				>
 					{icon}
 				</span>

@@ -92,16 +92,16 @@ const AmbientBackground: React.FC = () => {
 			className="fixed inset-0 -z-10 overflow-hidden"
 			style={{ backgroundColor: 'var(--ambient-background)' }}
 		>
-			{/* Bottom Left */}
-			<div className="absolute bottom-0 left-0 w-32 h-32">
+			{/* Bottom Left - hidden on mobile */}
+			<div className="absolute bottom-0 left-0 w-32 h-32 hidden md:block">
 				<div className="absolute bottom-0 left-0 w-20 h-0.5 bg-terminal-cyan/40" />
 				<div className="absolute bottom-0 left-0 w-0.5 h-20 bg-terminal-cyan/40" />
 				<div className="absolute bottom-6 left-6 w-12 h-0.5 bg-terminal-cyan/25" />
 				<div className="absolute bottom-6 left-6 w-0.5 h-12 bg-terminal-cyan/25" />
 			</div>
 
-			{/* Bottom Right */}
-			<div className="absolute bottom-0 right-0 w-32 h-32">
+			{/* Bottom Right - hidden on mobile */}
+			<div className="absolute bottom-0 right-0 w-32 h-32 hidden md:block">
 				<div className="absolute bottom-0 right-0 w-20 h-0.5 bg-terminal-cyan/40" />
 				<div className="absolute bottom-0 right-0 w-0.5 h-20 bg-terminal-cyan/40" />
 				<div className="absolute bottom-6 right-6 w-12 h-0.5 bg-terminal-cyan/25" />

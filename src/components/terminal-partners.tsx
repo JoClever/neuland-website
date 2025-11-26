@@ -17,99 +17,101 @@ const TerminalPartners: React.FC = () => {
 				<div className="absolute inset-0 bg-gradient-to-b from-terminal-cyan/3 via-transparent to-transparent pointer-events-none" />
 
 				<div className="flex flex-col lg:flex-row relative z-10">
-					{/* Left Side - Text Content */}
-					<div
-						className={`${showPartners ? 'lg:w-3/5' : 'w-full'} flex flex-col md:flex-row border-b lg:border-b-0 ${showPartners ? 'lg:border-r' : ''} border-terminal-window-border`}
+					{/* Info Section */}
+					<motion.div
+						initial={{ opacity: 0, x: -20 }}
+						whileInView={{ opacity: 1, x: 0 }}
+						transition={{ duration: 0.5 }}
+						viewport={{ once: true }}
+						className={`p-6 border-b lg:border-b-0 border-terminal-window-border ${
+							showPartners ? 'lg:w-1/3 lg:border-r' : 'lg:w-2/5 lg:border-r'
+						}`}
 					>
-						{/* Info Section */}
-						<motion.div
-							initial={{ opacity: 0, x: -20 }}
-							whileInView={{ opacity: 1, x: 0 }}
-							transition={{ duration: 0.5 }}
-							viewport={{ once: true }}
-							className="md:w-2/5 p-6 border-b md:border-b-0 md:border-r border-terminal-window-border"
-						>
-							<div className="text-terminal-text/60 mb-4 font-mono text-sm">
-								$ cat sponsoring-info.txt
-							</div>
-							<div className="text-terminal-text">
-								<p className="font-medium">
-									Jetzt Partner werden und unseren Verein unterstützen!
+						<div className="text-terminal-text/60 mb-4 font-mono text-sm">
+							$ cat sponsoring-info.txt
+						</div>
+						<div className="text-terminal-text">
+							<p className="font-medium">
+								Jetzt Partner werden und unseren Verein unterstützen!
+							</p>
+						</div>
+					</motion.div>
+
+					{/* Benefits Section */}
+					<motion.div
+						initial={{ opacity: 0, x: 20 }}
+						whileInView={{ opacity: 1, x: 0 }}
+						transition={{ duration: 0.5, delay: 0.1 }}
+						viewport={{ once: true }}
+						className={`p-6 space-y-5 ${
+							showPartners
+								? 'border-b lg:border-b-0 lg:border-r border-terminal-window-border lg:w-1/3'
+								: 'md:w-3/5'
+						}`}
+					>
+						<h4 className="text-xl font-semibold flex items-center">
+							<Zap size={18} className="text-terminal-cyan mr-2" />
+							Gemeinsam erreichen wir:
+						</h4>
+
+						<div className="space-y-3">
+							<div className="flex items-start group">
+								<span className="text-terminal-cyan mr-3 text-xl group-hover:scale-110 transition-transform duration-300 shrink-0 mt-0.5">
+									•
+								</span>
+								<p className="text-terminal-text/70 group-hover:text-terminal-text transition-colors duration-300 mb-0">
+									Spannende Events, Hackathons und Workshops, die Studierende
+									begeistern
 								</p>
 							</div>
-						</motion.div>
-
-						{/* Benefits Section */}
-						<motion.div
-							initial={{ opacity: 0, x: 20 }}
-							whileInView={{ opacity: 1, x: 0 }}
-							transition={{ duration: 0.5, delay: 0.1 }}
-							viewport={{ once: true }}
-							className="md:w-3/5 p-6 space-y-5"
-						>
-							<h4 className="text-xl font-semibold flex items-center">
-								<Zap size={18} className="text-terminal-cyan mr-2" />
-								Ihre Vorteile:
-							</h4>
-
-							<div className="space-y-3">
-								<div className="flex items-start group">
-									<span className="text-terminal-cyan mr-3 text-xl group-hover:scale-110 transition-transform duration-300 shrink-0 mt-0.5">
-										•
-									</span>
-									<p className="text-terminal-text/70 group-hover:text-terminal-text transition-colors duration-300 mb-0">
-										Direkter Zugang zu technikaffinen Studierenden
-									</p>
-								</div>
-								<div className="flex items-start group">
-									<span className="text-terminal-cyan mr-3 text-xl group-hover:scale-110 transition-transform duration-300 shrink-0 mt-0.5">
-										•
-									</span>
-									<p className="text-terminal-text/70 group-hover:text-terminal-text transition-colors duration-300 mb-0">
-										Sichtbarkeit bei Events und auf unseren digitalen
-										Plattformen
-									</p>
-								</div>
-								<div className="flex items-start group">
-									<span className="text-terminal-cyan mr-3 text-xl group-hover:scale-110 transition-transform duration-300 shrink-0 mt-0.5">
-										•
-									</span>
-									<p className="text-terminal-text/70 group-hover:text-terminal-text transition-colors duration-300 mb-0">
-										Möglichkeit zur Vorstellung von Technologien und
-										Fachvorträgen
-									</p>
-								</div>
+							<div className="flex items-start group">
+								<span className="text-terminal-cyan mr-3 text-xl group-hover:scale-110 transition-transform duration-300 shrink-0 mt-0.5">
+									•
+								</span>
+								<p className="text-terminal-text/70 group-hover:text-terminal-text transition-colors duration-300 mb-0">
+									Innovative Projekte und Karriereerfolge durch echte
+									Praxisbezüge
+								</p>
 							</div>
-
-							<div className="pt-2">
-								<TerminalButton
-									href="mailto:info@neuland-ingolstadt.de?subject=Anfrage%20zur%20Partnerschaft"
-									dark
-								>
-									<Mail
-										size={16}
-										className="mr-2 group-hover:rotate-8 transition-transform duration-300"
-									/>
-									Partner werden
-								</TerminalButton>
+							<div className="flex items-start group">
+								<span className="text-terminal-cyan mr-3 text-xl group-hover:scale-110 transition-transform duration-300 shrink-0 mt-0.5">
+									•
+								</span>
+								<p className="text-terminal-text/70 group-hover:text-terminal-text transition-colors duration-300 mb-0">
+									Eine lebendige Tech-Community, die Theorie und Praxis
+									zusammenbringt
+								</p>
 							</div>
-						</motion.div>
-					</div>
+						</div>
 
-					{/* Right Side - Partners Logos */}
+						<div className="pt-2">
+							<TerminalButton
+								href="mailto:info@neuland-ingolstadt.de?subject=Anfrage%20zur%20Partnerschaft"
+								dark
+							>
+								<Mail
+									size={16}
+									className="mr-2 group-hover:rotate-8 transition-transform duration-300"
+								/>
+								Partner werden
+							</TerminalButton>
+						</div>
+					</motion.div>
+
+					{/* Partners Logos */}
 					{showPartners && (
 						<motion.div
 							initial={{ opacity: 0, x: 20 }}
 							whileInView={{ opacity: 1, x: 0 }}
 							transition={{ duration: 0.5, delay: 0.2 }}
 							viewport={{ once: true }}
-							className="lg:w-2/5 flex flex-col"
+							className="lg:w-1/3 flex flex-row md:flex-col items-stretch"
 						>
 							<a
 								href="https://www.thi.de"
 								target="_blank"
 								rel="noreferrer noopener"
-								className="relative p-6 flex items-center justify-center h-full min-h-[120px] group/logo transition-all duration-300 overflow-hidden no-underline"
+								className="relative p-6 flex items-center justify-center min-h-[120px] flex-1 group/logo transition-all duration-300 overflow-hidden no-underline"
 							>
 								{/* Animated background on hover */}
 								<div className="absolute inset-0 bg-gradient-to-br from-terminal-cyan/5 via-terminal-cyan/2 to-transparent opacity-0 group-hover/logo:opacity-100 transition-opacity duration-300 pointer-events-none" />
@@ -141,7 +143,7 @@ const TerminalPartners: React.FC = () => {
 								href="https://www.explore.de"
 								target="_blank"
 								rel="noreferrer noopener"
-								className="relative p-6 border-t border-terminal-window-border flex items-center justify-center h-full min-h-[120px] group/logo transition-all duration-300 overflow-hidden no-underline"
+								className="relative p-6 border-l md:border-l-0 md:border-t border-terminal-window-border flex items-center justify-center min-h-[120px] flex-1 group/logo transition-all duration-300 overflow-hidden no-underline"
 							>
 								{/* Animated background on hover */}
 								<div className="absolute inset-0 bg-gradient-to-br from-terminal-cyan/5 via-terminal-cyan/2 to-transparent opacity-0 group-hover/logo:opacity-100 transition-opacity duration-300 pointer-events-none" />
