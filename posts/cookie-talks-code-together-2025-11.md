@@ -14,7 +14,7 @@ tags:
 
 Servus liebe Leserinnen und Leser,
 
-am Mittwoch, den 5. November 2025, fanden die Cookie Talks erstmals kombiniert mit anschließendem code:together statt - und das mit überraschend großem Zulauf.
+am Donnerstag, den 6. November 2025, fanden die Cookie Talks erstmals kombiniert mit anschließendem code:together statt - und das mit überraschend großem Zulauf.
 Für mich ist das der perfekte Anlass, meinen ersten Neuland-Blog-Beitrag zu schreiben.
 
 Die Veranstaltung war dieses Mal so gut besucht, dass viele Interessierte im gefüllten Raum sogar stehend den Vorträgen lauschten, was angesichts des Angebots an Cookies, Spezi und Freibier aber gut zu verschmerzen war.
