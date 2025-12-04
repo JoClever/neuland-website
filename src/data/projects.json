@@ -151,7 +151,7 @@
 		"links": [
 			{
 				"label": "GitHub",
-				"url": "https://github.com/neuland-ingolstadt/aoc-leaderboard"
+				"url": "https://github.com/neuland-ingolstadt/neuland-aoc-leaderboard"
 			}
 		],
 		"tags": ["Next.js", "TypeScript", "Go"],
