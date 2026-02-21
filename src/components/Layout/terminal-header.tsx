@@ -33,6 +33,7 @@ const useNavigation = () => {
 			href: '/#membership',
 			external: false
 		},
+		{ name: t('events'), href: '/events', external: false },
 		{ name: t('projects'), href: '/projects', external: false },
 		{ name: t('blog'), href: '/blog', external: false },
 		{

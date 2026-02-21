@@ -49,15 +49,21 @@ export default function LanguageToggle() {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
 				<DropdownMenuLabel>Language</DropdownMenuLabel>
-				<DropdownMenuItem onClick={() => handleLanguageChange('en')}>
+				<DropdownMenuItem
+					onClick={() => handleLanguageChange('en')}
+					className="cursor-pointer hover:bg-terminal-darkGreen/45 hover:text-terminal-lightGreen focus:bg-terminal-darkGreen/45 focus:text-terminal-lightGreen data-[highlighted]:bg-terminal-darkGreen/45 data-[highlighted]:text-terminal-lightGreen"
+				>
 					<div className="flex w-full items-center justify-between">
-						<span>GB English</span>
+						<span>🇬🇧 English</span>
 						{locale === 'en' && <Check className="ml-2 h-4 w-4" />}
 					</div>
 				</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => handleLanguageChange('de')}>
+				<DropdownMenuItem
+					onClick={() => handleLanguageChange('de')}
+					className="cursor-pointer hover:bg-terminal-darkGreen/45 hover:text-terminal-lightGreen focus:bg-terminal-darkGreen/45 focus:text-terminal-lightGreen data-[highlighted]:bg-terminal-darkGreen/45 data-[highlighted]:text-terminal-lightGreen"
+				>
 					<div className="flex w-full items-center justify-between">
-						<span>DE Deutsch</span>
+						<span>🇩🇪 Deutsch</span>
 						{locale === 'de' && <Check className="ml-2 h-4 w-4" />}
 					</div>
 				</DropdownMenuItem>

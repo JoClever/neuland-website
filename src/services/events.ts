@@ -3,19 +3,24 @@ import 'moment/locale/de'
 import 'moment-timezone'
 
 moment.tz.setDefault('Europe/Berlin')
+moment.locale('de')
 
-// Legacy interface removed in favor of PublicEventResponse below
-
-interface Event {
+export interface Event {
+	id: number
 	title: string
+	titleDe: string
+	titleEn: string
 	date: string
 	location: string
 	description: string
+	descriptionDe: string
+	descriptionEn: string
 	nextOccurrence: string
+	startDateTime: string
+	endDateTime: string | null
+	eventUrl: string | null
 	isInternal: boolean
 }
-
-// RRule translations and helpers removed because events are no longer recurring
 
 function getDateStr(startDate: moment.Moment, event: PublicEventResponse) {
 	if (!startDate.isValid()) {
@@ -42,9 +47,10 @@ const API_URL =
 	process.env.NEXT_PUBLIC_API_URL ??
 	'https://cl.neuland-ingolstadt.de/api/ical/4/events'
 
-let cachedEvents: { semester: string; events: Event[] } | null = null
-let cacheTimestamp = 0
+let cachedAllEvents: { semester: string; events: Event[] } | null = null
+let allEventsCacheTimestamp = 0
 const CACHE_TTL = 300000
+
 export type PublicEventResponse = {
 	description_de?: string | null
 	description_en?: string | null
@@ -59,13 +65,70 @@ export type PublicEventResponse = {
 	is_internal: boolean
 }
 
-export const fetchEvents = async (): Promise<{
+function getSemesterFromDate(date: moment.Moment): string {
+	const year = date.year()
+	const month = date.month() + 1
+
+	if (month >= 4 && month <= 9) {
+		return `SS ${year}`
+	}
+	const winterYear = month <= 3 ? year - 1 : year
+	const winterYearNext = month <= 3 ? year : year + 1
+	return `WS ${winterYear}/${winterYearNext.toString().slice(-2)}`
+}
+
+function sortEventsAscending(a: Event, b: Event) {
+	const dateAValid = a.nextOccurrence !== ''
+	const dateBValid = b.nextOccurrence !== ''
+
+	if (!dateAValid && !dateBValid) {
+		return a.title.localeCompare(b.title)
+	}
+
+	if (!dateAValid) return 1
+	if (!dateBValid) return -1
+
+	const dateA = new Date(a.nextOccurrence)
+	const dateB = new Date(b.nextOccurrence)
+	return dateA.getTime() - dateB.getTime()
+}
+
+function toEvent(event: PublicEventResponse): Event {
+	const startDate = moment(event.start_date_time).tz('Europe/Berlin')
+	const endDate = event.end_date_time
+		? moment(event.end_date_time).tz('Europe/Berlin')
+		: null
+	const titleDe = event.title_de || event.title_en || 'Untitled event'
+	const titleEn = event.title_en || event.title_de || 'Untitled event'
+	const descriptionDe = event.description_de || event.description_en || ''
+	const descriptionEn = event.description_en || event.description_de || ''
+	const nextOccurrence = startDate.isValid() ? startDate.toISOString() : ''
+
+	return {
+		id: event.id,
+		title: titleDe,
+		titleDe,
+		titleEn,
+		date: getDateStr(startDate, event),
+		location: event.location || '',
+		description: descriptionDe,
+		descriptionDe,
+		descriptionEn,
+		nextOccurrence,
+		startDateTime: event.start_date_time,
+		endDateTime: endDate?.isValid() ? endDate.toISOString() : null,
+		eventUrl: event.event_url || null,
+		isInternal: event.is_internal
+	}
+}
+
+export const fetchAllEvents = async (): Promise<{
 	semester: string
 	events: Event[]
 }> => {
 	const now = Date.now()
-	if (cachedEvents && now - cacheTimestamp < CACHE_TTL) {
-		return cachedEvents
+	if (cachedAllEvents && now - allEventsCacheTimestamp < CACHE_TTL) {
+		return cachedAllEvents
 	}
 
 	try {
@@ -85,87 +148,54 @@ export const fetchEvents = async (): Promise<{
 		}
 
 		const responseData = await response.json()
-		function getSemesterFromDate(date: moment.Moment): string {
-			const year = date.year()
-			const month = date.month() + 1 // moment months are 0-based
-
-			if (month >= 4 && month <= 9) {
-				return `SS ${year}`
-			}
-			const winterYear = month <= 3 ? year - 1 : year
-			const winterYearNext = month <= 3 ? year : year + 1
-			return `WS ${winterYear}/${winterYearNext.toString().slice(-2)}`
+		if (!Array.isArray(responseData)) {
+			throw new Error('Invalid events response format')
 		}
 
-		const events = responseData.map((event: PublicEventResponse): Event => {
-			moment.locale('de')
+		const events = (responseData as PublicEventResponse[])
+			.map((event) => toEvent(event))
+			.sort(sortEventsAscending)
 
-			const startDate = moment(event.start_date_time).tz('Europe/Berlin')
-			const dateStr = getDateStr(startDate, event)
-			const nextOccurrence = startDate
-
-			return {
-				title: event.title_de,
-				date: dateStr,
-				location: event.location || '',
-				description: event.description_de || '',
-				isInternal: event.is_internal,
-				nextOccurrence: nextOccurrence.isValid()
-					? nextOccurrence.toISOString()
-					: ''
-			}
+		const nextUpcomingEvent = events.find((event) => {
+			if (!event.nextOccurrence) return false
+			return new Date(event.nextOccurrence) >= new Date()
 		})
-
-		const filteredEvents = events
-			.filter((event: Event) => {
-				if (!event.nextOccurrence) return false
-				const nextDate = new Date(event.nextOccurrence)
-				return nextDate >= new Date()
-			})
-			.sort((a: Event, b: Event) => {
-				const dateAValid = a.nextOccurrence !== ''
-				const dateBValid = b.nextOccurrence !== ''
-
-				if (!dateAValid && !dateBValid) {
-					return a.title.localeCompare(b.title)
-				}
-
-				if (!dateAValid) return 1
-				if (!dateBValid) return -1
-
-				const dateA = new Date(a.nextOccurrence)
-				const dateB = new Date(b.nextOccurrence)
-
-				if (dateA < dateB) {
-					return -1
-				}
-				if (dateA > dateB) {
-					return 1
-				}
-				return 0
-			})
-
-		// Determine semester based on first event or fallback to current date
 		let semester: string
-		if (filteredEvents.length > 0 && filteredEvents[0].nextOccurrence) {
-			const firstEventDate = moment(filteredEvents[0].nextOccurrence)
+		if (nextUpcomingEvent?.nextOccurrence) {
+			const firstEventDate = moment(nextUpcomingEvent.nextOccurrence)
 			semester = getSemesterFromDate(firstEventDate)
 		} else {
-			const now = moment()
-			semester = getSemesterFromDate(now)
+			semester = getSemesterFromDate(moment())
 		}
 
 		const result = {
 			semester,
-			events: filteredEvents
+			events
 		}
 
-		cachedEvents = result
-		cacheTimestamp = now
+		cachedAllEvents = result
+		allEventsCacheTimestamp = now
 
 		return result
 	} catch (error) {
 		console.error('Error fetching events:', error)
 		throw error
+	}
+}
+
+export const fetchEvents = async (): Promise<{
+	semester: string
+	events: Event[]
+}> => {
+	const allEvents = await fetchAllEvents()
+	const now = new Date()
+	const events = allEvents.events.filter((event) => {
+		if (!event.nextOccurrence) return false
+		return new Date(event.nextOccurrence) >= now
+	})
+
+	return {
+		semester: allEvents.semester,
+		events
 	}
 }

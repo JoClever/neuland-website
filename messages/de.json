@@ -15,6 +15,8 @@
             "onlyForMembersDescription": "Diese Veranstaltung ist ausschließlich für Vereinsmitglieder und nicht öffentlich.",
             "internalBadge": "Intern",
             "showAllEvents": "Alle Events",
+            "openEventDetails": "Details öffnen",
+            "openEventsPage": "Events-Seite öffnen",
             "subscribeToEvents": "Events abonnieren",
             "doNotCloseWindowStickyNote": "Fenster nicht schließen!",
             "eventsIn": "Events im"
@@ -144,6 +146,7 @@
     },
     "Navigation": {
         "becomeMember": "Mitglied werden",
+        "events": "Events",
         "projects": "Projekte",
         "blog": "Blog",
         "login": "Login"
@@ -199,6 +202,42 @@
         "metadata": {
             "title": "Neuland Ingolstadt Blog",
             "description": "Blog des Neuland Ingolstadt e.V. - Informatik- und Technikthemen, Events und Workshops"
+        }
+    },
+    "Events": {
+        "title": "Events",
+        "subtitle": "Entdecke alle Neuland-Events mit Filtern nach Zielgruppe und Zeitraum.",
+        "apiErrorTitle": "Oh nein! Beim Abrufen der Events ist etwas schiefgelaufen.",
+        "eventsFound": "{count, plural, =0 {Keine Events gefunden} =1 {1 Event gefunden} other {# Events gefunden}}",
+        "filters": {
+            "visibility": "Sichtbarkeit",
+            "time": "Zeitraum",
+            "all": "Alle",
+            "public": "Öffentlich",
+            "internal": "Intern",
+            "upcoming": "Kommend",
+            "past": "Vergangen"
+        },
+        "openDetails": "Details",
+        "eventWebsite": "Eventseite",
+        "emptyState": "Keine Events entsprechen den gewählten Filtern.",
+        "date": "Datum",
+        "location": "Ort",
+        "details": "Details",
+        "tbd": "Offen",
+        "noDescription": "Es sind noch keine weiteren Details verfügbar.",
+        "shareableHint": "Teilbare URL:",
+        "copyLink": "Link kopieren",
+        "copied": "Kopiert",
+        "backToEvents": "Zurück zu allen Events",
+        "breadcrumbs": {
+            "home": "Home",
+            "events": "Events"
+        },
+        "metadata": {
+            "title": "Events - Neuland Ingolstadt",
+            "description": "Alle Neuland-Events mit Filtern für öffentlich/intern und kommend/vergangen.",
+            "notFound": "Event nicht gefunden"
         }
     },
     "Metadata": {

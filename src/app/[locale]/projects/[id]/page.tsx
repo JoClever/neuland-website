@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import type { ProjectDetails } from '@/components/Projects/project-card'
@@ -20,7 +21,7 @@ export async function generateMetadata({
 	params
 }: {
 	params: Promise<{ locale: string; id: string }>
-}) {
+}): Promise<Metadata> {
 	const { locale } = await params
 	const t = await getTranslations({ locale, namespace: 'Projects.metadata' })
 

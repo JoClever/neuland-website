@@ -15,6 +15,8 @@
             "onlyForMembersDescription": "This event is exclusively for association members and is not open to the public.",
             "internalBadge": "Internal",
             "showAllEvents": "All Events",
+            "openEventDetails": "Open details",
+            "openEventsPage": "Open events page",
             "subscribeToEvents": "Subscribe to Events",
             "doNotCloseWindowStickyNote": "Do not close window!",
             "eventsIn": "Events in"
@@ -144,6 +146,7 @@
     },
     "Navigation": {
         "becomeMember": "Become a Member",
+        "events": "Events",
         "projects": "Projects",
         "blog": "Blog",
         "login": "Login"
@@ -199,6 +202,42 @@
         "metadata": {
             "title": "Neuland Ingolstadt Blog",
             "description": "Blog of Neuland Ingolstadt e.V. - Computer science and tech topics, events and workshops"
+        }
+    },
+    "Events": {
+        "title": "Events",
+        "subtitle": "Browse all Neuland events with filters for audience and timeframe.",
+        "apiErrorTitle": "Oh no! Something went wrong while fetching the events.",
+        "eventsFound": "{count, plural, =0 {No events found} =1 {1 event found} other {# events found}}",
+        "filters": {
+            "visibility": "Visibility",
+            "time": "When",
+            "all": "All",
+            "public": "Public",
+            "internal": "Internal",
+            "upcoming": "Upcoming",
+            "past": "Past"
+        },
+        "openDetails": "Details",
+        "eventWebsite": "Event page",
+        "emptyState": "No events match the selected filters.",
+        "date": "Date",
+        "location": "Location",
+        "details": "Details",
+        "tbd": "TBD",
+        "noDescription": "No additional details available yet.",
+        "shareableHint": "Shareable URL:",
+        "copyLink": "Copy link",
+        "copied": "Copied",
+        "backToEvents": "Back to all events",
+        "breadcrumbs": {
+            "home": "Home",
+            "events": "Events"
+        },
+        "metadata": {
+            "title": "Events - Neuland Ingolstadt",
+            "description": "All Neuland events with filters for public/internal and upcoming/past.",
+            "notFound": "Event not found"
         }
     },
     "Metadata": {

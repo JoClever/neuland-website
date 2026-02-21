@@ -1,5 +1,5 @@
 'use client'
-import { CalendarIcon, LucideArrowBigLeft } from 'lucide-react'
+import { ArrowUpRight, CalendarIcon, LucideArrowBigLeft } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import React, { useCallback, useRef, useState } from 'react'
 import TerminalTypeWriter from '@/components/Events/terminal-type-writer'
@@ -16,6 +16,8 @@ interface TerminalEventsProps {
 	initialData?: Awaited<ReturnType<typeof fetchEvents>>
 	error?: string | null
 }
+
+const MAX_TERMINAL_CONTENT_HEIGHT_PX = 576
 
 const InternalBadge = React.forwardRef<
 	HTMLSpanElement,
@@ -65,7 +67,12 @@ const TerminalEvents: React.FC<TerminalEventsProps> = ({
 	const handleEventClick = useCallback(
 		(index: number) => {
 			if (containerRef.current && selectedEventIndex === null) {
-				setContainerHeight(containerRef.current.offsetHeight)
+				setContainerHeight(
+					Math.min(
+						containerRef.current.offsetHeight,
+						MAX_TERMINAL_CONTENT_HEIGHT_PX
+					)
+				)
 			}
 			setSelectedEventIndex((prev) => (prev === index ? null : index))
 		},
@@ -102,10 +109,7 @@ const TerminalEvents: React.FC<TerminalEventsProps> = ({
 					onRedButtonClick={handleRedButtonClick}
 					className="max-h-none"
 				>
-					<div
-						className="overflow-auto overflow-x-hidden"
-						style={{ maxHeight: 'none' }}
-					>
+					<div className="overflow-y-auto overflow-x-hidden max-h-[65vh] md:max-h-[36rem]">
 						<TerminalList>
 							{error ? (
 								<div className="p-4 text-terminal-lightGreen">
@@ -237,17 +241,26 @@ const TerminalEvents: React.FC<TerminalEventsProps> = ({
 												</div>
 
 												<div className="flex-none pt-3 pb-4">
-													<button
-														onClick={resetSelectedEvent}
-														className="text-terminal-text transition-colors px-2 py-1 text-sm inline-flex items-center font-bold group bg-terminal-card border border-terminal-window-border hover:bg-terminal-window-border/30"
-														type="button"
-													>
-														<LucideArrowBigLeft
-															size={16}
-															className="mr-1 group-hover:text-terminal-highlight transition-colors"
-														/>
-														{t('showAllEvents')}
-													</button>
+													<div className="flex flex-wrap gap-2">
+														<button
+															onClick={resetSelectedEvent}
+															className="text-terminal-text transition-colors px-2 py-1 text-sm inline-flex items-center font-bold group bg-terminal-card border border-terminal-window-border hover:bg-terminal-window-border/30"
+															type="button"
+														>
+															<LucideArrowBigLeft
+																size={16}
+																className="mr-1 group-hover:text-terminal-highlight transition-colors"
+															/>
+															{t('showAllEvents')}
+														</button>
+														<TerminalButton
+															href={`/events/${eventsData.events[selectedEventIndex].id}`}
+															className="px-2 py-1 text-sm font-bold"
+														>
+															{t('openEventDetails')}
+															<ArrowUpRight size={14} />
+														</TerminalButton>
+													</div>
 												</div>
 											</div>
 										)}
@@ -312,7 +325,7 @@ const TerminalEvents: React.FC<TerminalEventsProps> = ({
 					</div>
 				</TerminalWindow>
 
-				<div className="flex sm:justify-end -mt-4 ">
+				<div className="flex flex-wrap gap-2 sm:justify-end -mt-4 ">
 					<TerminalButton onClick={openCalModal}>
 						<CalendarIcon
 							size={16}
