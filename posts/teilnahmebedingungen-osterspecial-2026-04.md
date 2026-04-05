@@ -3,18 +3,21 @@ title: "Teilnahmebedingungen zur Osterenten-Suchaktion 2026"
 authors: 
   - name: "Kiwi"
 date: 2026-04-05T18:00
-description: "Diese Teilnahmebedingungen regeln die Durchführung der Oster-Aktion von Neuland Ingolstadt e. V. Mit der Teilnahme an der Aktion akzeptiert der Teilnehmer die folgenden Bedingungen."
+description: "Diese Teilnahmebedingungen regeln die Durchführung der Oster-Aktion von Neuland Ingolstadt e. V. Mit der Teilnahme an der Aktion akzeptiert der Teilnehmende die folgenden Bedingungen."
 tags:
   - Community
   - Legal
 ---
 
-Diese Teilnahmebedingungen regeln die Durchführung der Oster-Aktion von Neuland Ingolstadt e. V. Mit der Teilnahme an der Aktion akzeptiert der Teilnehmer die folgenden Bedingungen.
+Diese Teilnahmebedingungen regeln die Durchführung der Oster-Aktion von Neuland Ingolstadt e. V. Mit der Teilnahme an der Aktion akzeptiert der Teilnehmende die folgenden Bedingungen.
 
 ## 1. Veranstalter
-Verantwortlich für die Aktion ist 
+Verantwortlich für die Aktion ist
+
 Neuland Ingolstadt e.V.
+
 Esplanade 10
+
 85049 Ingolstadt
 
 ## 2. Teilnahmeberechtigung
@@ -29,8 +32,8 @@ Die Suche beginnt am Karfreitag, 03.04.2026 12:00 Uhr  und endet am Freitag,17.0
 Auf dem Campus der TH Ingolstadt wurden insgesamt 20 Figuren versteckt.
 Ein Gewinnanspruch besteht nur für jede Person, die:
 
-1. Eine der Figuren finden.
-2. Ein Foto der Figur am Fundort in ihrer Instagram-Story posten und dabei @neuland_ingolstadt markieren.
+1. Eine der Figuren findet.
+2. Ein Foto der Figur am Fundort in ihrer Instagram-Story postet und dabei @neuland_ingolstadt markiert.
 3. Zusätzlich bei privaten Profilen: Da Markierungen von privaten Profilen für uns nicht immer sichtbar sind, schicke uns das Foto deiner Story bitte zusätzlich als Direktnachricht (DM) spätestens bis zum 17.04.2026, 12:00 Uhr.
 4. Im Chat wird Abholzeit und -ort vereinbart.
 
