@@ -10,12 +10,12 @@ tags:
   - Linux
   - Intel
   - Software Developer
-  - Carreer
+  - Career
 ---
 
 Servus liebe Leserinnen und Leser,
 
-nachdem die Cookie Talks im November und Dezember 2025 so gut angenommen wurden, war es nur logisch, dass sie auch in diesem Semester wieder stattfinden müssen. Und so gab es letzte Woche Dienstag, am 14.04.2026, wieder eine Reihe spannender Vorträge und natürlich reichlich selbstgebackene Cookies.
+nachdem die Cookie Talks im November und Dezember 2025 so gut angenommen wurden, war es nur logisch, dass sie auch in diesem Semester wieder stattfinden müssen. Und so gab es letzte Woche Donnerstag, am 23.04.2026, wieder eine Reihe spannender Vorträge und natürlich reichlich selbstgebackene Cookies.
 
 ![Cookie Talks](/assets/blog/cookie-talks-2026-04/2026-04-23_cookie-talks_1.jpg)
 
