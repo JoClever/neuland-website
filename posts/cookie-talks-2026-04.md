@@ -23,7 +23,7 @@ nachdem die Cookie Talks im November und Dezember 2025 so gut angenommen wurden,
 
 Panther Lake – ist das ein See in Florida, in New York oder vielleicht auf Vancouver Island?
 
-Zum Auftakt des Abends führte Tommaso Albertoni die Zuhörer in die Welt der Prozessorarchitekturen und beleuchtete dabei Intels neue Mobile-Chips. Die Antwort auf vorige Frage: Alles richtig, aber in diesem Kontext ist es Intels Codename für die Intel Core Ultra Serie 3 für Laptops, gefertigt auf dem neuen Intel 18A Prozess mit RibbonFET-Transistoren.
+Zum Auftakt des Abends führte Tommaso Albertoni die Zuhörer in die Welt der Prozessorarchitekturen und beleuchtete dabei Intels neue Mobile-Chips. Die Antwort auf die vorherige Frage: Alles richtig, aber in diesem Kontext ist es Intels Codename für die Intel Core Ultra Serie 3 für Laptops, gefertigt auf dem neuen Intel 18A Prozess mit RibbonFET-Transistoren.
 
 Nach einer Einführung in die wichtigsten Begriffe ging es zum Kern des Vortrags, nämlich Intels Hybrid-Core-Strategie: Panther Lake kombiniert bis zu vier leistungsstarke P-Kerne (Cougar Cove), acht E-Kerne für parallele Workloads und vier besonders energiesparende LP-E-Kerne für Hintergrundaufgaben (sogar im Standby). Welcher Kern wann zum Einsatz kommt, regelt der Intel Thread Director gemeinsam mit dem OS-Scheduler durch kontinuierliche Telemetrie. Neu ist außerdem die Chiplet-Architektur: Anders als beim Vorgänger Lunar Lake sitzt der Arbeitsspeicher nicht mehr direkt auf dem Package, was mehr Flexibilität bei der Konfiguration ermöglicht – von der kleinen 8-Kern-Variante für Office-Notebooks bis zur 16-Kern-Konfiguration mit 12 Xe3-GPU-Kernen für kreative Anwendungen.
 
@@ -35,7 +35,7 @@ Als kleines Bonus-Thema gab es noch Wildcat Lake, Intels abgespeckte Variante mi
 
 I'd just like to interject for a moment. What you're refering to as Linux, is in fact, GNU/Linux, or as I've recently taken to calling it, GNU plus Linux...
 
-Die Referenz habe ich bereits in einem vorigen Blogbeitrag versteckt, aber auch Julian Kobylanski hielt die bekannte GNU/Linux-Copypasta für einen guten Einstieg in sein Thema rund das moderne Linux-Betriebssystem. Wer Linux sagt, meint kein reines Kernel-System – die eigentliche Frage ist, welche Komponenten neben dem Kernel das System ausmachen.
+Die Referenz habe ich bereits in einem vorigen Blogbeitrag versteckt, aber auch Julian Kobylanski hielt die bekannte GNU/Linux-Copypasta für einen guten Einstieg in sein Thema rund um das moderne Linux-Betriebssystem. Wer Linux sagt, meint kein reines Kernel-System – die eigentliche Frage ist, welche Komponenten neben dem Kernel das System ausmachen.
 
 Was heute Linux ist, hat viele Altlasten überwinden müssen. Das zeigte Julian anhand eines klassischen SysVinit-Skripts: sequentieller Boot-Prozess, kein automatischer Neustart bei Abstürzen, und jede Menge manuelle Fehlerbehandlung im Shell-Code. Im Vergleich dazu wirkt eine moderne systemd-Unit-Datei geradezu erfrischend kurz: Wenige Zeilen für einen vollständig überwachten Dienst mit automatischem Neustart.
 
@@ -47,7 +47,7 @@ Zum Abschluss gab Julian einen Ausblick auf die Zukunft: Immutable Distros setze
 
 ## Bewerbungsgespräche als Softwareentwickler:in (Markus Herhoffer)
 
-Auf was muss ich mich beim Bewerbungsgespräch einstellen? Warum ist die Jobsuche gerade so schwierig? Und wer sind Tim Taschenspieler, Ben Buzzword und Bernd Brüllmann? Die Antworten darauf lieferte das Finale des Abends von Markus Herrhofer mit seinem Vortrag über Bewerbungsgespräche als Softwareentwickler:in.
+Auf was muss ich mich beim Bewerbungsgespräch einstellen? Warum ist die Jobsuche gerade so schwierig? Und wer sind Tim Taschenspieler, Ben Buzzword und Bernd Brüllmann? Die Antworten darauf lieferte das Finale des Abends von Markus Herhoffer mit seinem Vortrag über Bewerbungsgespräche als Softwareentwickler:in.
 
 Markus eröffnete mit einer nüchternen Bestandsaufnahme des aktuellen IT-Arbeitsmarkts: 109.000 offene IT-Stellen stehen 61.000 arbeitslosen ITlern gegenüber – und trotzdem brauchen viele Bewerber bis zu 40 Versuche bis zum ersten Gespräch. Der Grund: KI erledigt bereits heute die Arbeit eines durchschnittlichen Juniors in Minuten, was den Einstieg für Absolventinnen und Absolventen erheblich schwerer macht.
 
